@@ -1,0 +1,44 @@
+version: '3'
+services:
+  actuating-eventsourcing:
+    image: qkrcksduf/actuating-eventsourcing
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -DAXON_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9001:9001
+    restart: always
+  
+  sensing-eventsourcing:
+    image: qkrcksduf/sensing-eventsourcing
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -DAXON_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9002:9002
+    restart: always
+
+  query:
+    image: qkrcksduf/query
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -DAXON_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9003:9003
+    restart: always
+  

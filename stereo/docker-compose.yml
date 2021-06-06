@@ -1,0 +1,30 @@
+version: '3'
+services:
+  stereo-actuating:
+    image: qkrcksduf/stereo-actuating
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9011:9011
+    restart: always  
+
+  stereo-sensing:
+    image: qkrcksduf/stereo-sensing
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9012:9012
+    restart: always  
+
+
+  

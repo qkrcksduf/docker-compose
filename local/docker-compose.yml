@@ -1,0 +1,32 @@
+version: '3'
+services:
+  database:
+    image: postgres
+    container_name: pgsql
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+      - ./create-database.sh:/docker-entrypoint-initdb.d/create-database.sh
+      - ./schemas:/docker-entrypoint-initdb.d/schemas
+    environment:
+      - POSTGRES_USER=charlie
+      - POSTGRES_PASSWORD=charlie123
+      - POSTGRES_MULTIPLE_DATABASES=nrf_account,nrf_cnc,nrf_device,nrf_model,nrf_sensing_event_sourcing,nrf_actuating_event_sourcing,stereo_sensing,stereo_actuating,nrf_query
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U charlie"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5434:5432
+    restart: always
+  
+  axon:
+    image: axoniq/axonserver
+    restart: on-failure
+    ports:
+      - 8024:8024
+      - 8124:8124
+    restart: always
+
+  

@@ -1,0 +1,71 @@
+version: '3'
+services:
+  account:
+    image: qkrcksduf/account
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 8001:8001
+    restart: always  
+
+  cnc:
+    image: qkrcksduf/cnc
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 8002:8002
+    restart: always  
+
+  device:
+    image: qkrcksduf/device
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -DAXON_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 8003:8003
+    restart: always
+
+  model:
+    image: qkrcksduf/model
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 8005:8005
+    restart: always
+
+  virtual-cnc:
+    image: qkrcksduf/virtual-cnc
+    environment:
+      - JAVA_OPTS=
+        -DDB_HOST=192.168.10.63    
+        -DGATEWAY_HOST=192.168.10.63  
+        -DEUREKA_HOST=192.168.10.63
+        -DAXON_HOST=192.168.10.63
+        -Duser.timezone=Asia/Seoul
+        -Xmx256m
+    ports:
+      - 9013:9013
+    restart: always
+
+
+  
